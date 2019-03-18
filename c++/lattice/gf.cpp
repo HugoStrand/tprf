@@ -37,36 +37,32 @@ namespace tprf {
 // ----------------------------------------------------
 // g
 
-#ifdef TPRF_OMP
-
 gk_iw_t lattice_dyson_g0_wk(double mu, ek_vt e_k, g_iw_t::mesh_t mesh) {
+
+  auto _ = all_t{};
 
   auto I = make_unit_matrix<ek_vt::scalar_t>(e_k.target_shape()[0]);
   gk_iw_t g0_wk = make_gf<gk_iw_t::mesh_t::var_t>({mesh, e_k.mesh()}, e_k.target());
+
+  auto wmesh = std::get<0>(g0_wk.mesh());
+  auto kmesh = std::get<1>(g0_wk.mesh());
     
-  auto arr = mpi_view(g0_wk.mesh());
+  auto arr = mpi_view(kmesh);
 
 #pragma omp parallel for
   for (int idx = 0; idx < arr.size(); idx++) {
-    auto &[w, k] = arr(idx);
-    g0_wk[w, k] = inverse((w + mu)*I - e_k(k));      
+    auto & k = arr(idx);
+
+    auto g0_w = make_gf<imfreq>(wmesh, g0_wk.target());
+
+    for (auto const &w : wmesh)
+        g0_w[w] = inverse((w + mu)*I - e_k(k));
+
+#pragma omp critical
+    g0_wk[_, k] = g0_w;      
   }
 
   g0_wk = mpi_all_reduce(g0_wk);  
-  return g0_wk;
-}
-
-#else
-  
-gk_iw_t lattice_dyson_g0_wk(double mu, ek_vt e_k, g_iw_t::mesh_t mesh) {
-
-  auto I = make_unit_matrix<ek_vt::scalar_t>(e_k.target_shape()[0]);
-  gk_iw_t g0_wk = make_gf<gk_iw_t::mesh_t::var_t>({mesh, e_k.mesh()}, e_k.target());
-  
-  for (auto const &[w, k] : mpi_view(g0_wk.mesh()))
-      g0_wk[w, k] = inverse((w + mu)*I - e_k(k));
-
-  g0_wk = mpi_all_reduce(g0_wk);
   return g0_wk;
 }
 
@@ -82,8 +78,6 @@ gk_iw_t lattice_dyson_g0_wk(double mu, ek_vt e_k, g_iw_t::mesh_t mesh) {
   return g0_wk;
 }
   */
-  
-#endif
 
 // ----------------------------------------------------
   
