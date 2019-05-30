@@ -23,7 +23,7 @@
 from common import *
 
 if mpi.is_master_node():
-    with HDFArchive('data_B_z_0.000000.h5', 'r') as a:
+    with HDFArchive('data_B_0.000000.h5', 'r') as a:
         p = a['ps'].objects[-1]
 else: p = None
 p = mpi.bcast(p)
@@ -48,9 +48,9 @@ p.G2_iw_ph = cthyb.G2_iw_ph.copy()
 from triqs_tprf.linalg import inverse_PH
 from triqs_tprf.chi_from_gg2 import chi0_from_gg2_PH
 
-chi_m = p.G2_iw_ph[('up','up')] - p.G2_iw_ph[('up','do')]
-chi0_m = chi0_from_gg2_PH(p.G_w['up'], chi_m)
-gamma_m = inverse_PH(chi0_m) - inverse_PH(chi_m)
+p.chi_m = p.G2_iw_ph[('up','up')] - p.G2_iw_ph[('up','do')]
+p.chi0_m = chi0_from_gg2_PH(p.G_w['up'], p.chi_m)
+p.gamma_m = inverse_PH(p.chi0_m) - inverse_PH(p.chi_m)
 
 del p.solve.measure_G2_blocks
 if mpi.is_master_node():

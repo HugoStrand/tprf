@@ -23,9 +23,9 @@
 from common import *
 
 p = ParameterCollection(
-    t=1., B=0., U=10., mu=0., n_k=16, n_iter=10, G_l_tol=5e-4,
+    t=1., B=0., U=10., mu=0., n_k=16, n_iter=10, G_l_tol=2e-5,
     solve = ParameterCollection(
-        length_cycle = 10, n_warmup_cycles = 10000, n_cycles = int(2.5e6),
+        length_cycle = 10, n_warmup_cycles = 10000, n_cycles = int(2.5e5),
         move_double = False, measure_G_l = True
         ),
     init = ParameterCollection(
@@ -35,10 +35,10 @@ p = ParameterCollection(
     )
 
 p = setup_dmft_calculation(p)
-for B in np.linspace(0., 1.0, num=6):
+for B in [0., 0.05, 0.1, 0.15, 0.2, 0.25, 0.4, 0.6, 0.8, 1.0]:
     p.B = B
     ps = solve_self_consistent_dmft(p)
     p = ps[-1]
     if mpi.is_master_node():
-        with HDFArchive('data_B_z_{:f}.h5'.format(B_z), 'w') as a:
+        with HDFArchive('data_B_{:f}.h5'.format(p.B), 'w') as a:
             a['ps'] = ParameterCollections(ps)

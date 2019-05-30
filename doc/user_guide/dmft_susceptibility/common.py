@@ -80,7 +80,7 @@ def dmft_self_consistent_step(p):
     p = copy.deepcopy(p)
     p.iter += 1
 
-    p.g_w = lattice_dyson_g_w(p.mu, p.e_k, p.sigma_w - np.diag([p.B_z, -p.B_z]))
+    p.g_w = lattice_dyson_g_w(p.mu, p.e_k, p.sigma_w - np.diag([p.B, -p.B]))
     p.g0_w = p.g_w.copy()
     p.g0_w << inverse(inverse(p.g_w) + p.sigma_w)
 
@@ -108,8 +108,8 @@ def dmft_self_consistent_step(p):
 
     # -- local observables
     p.rho = p.g_w.density()
-    M_z_old = p.M_z if hasattr(p, 'M_z') else float('nan')
-    p.M_z = 0.5*(p.rho[0, 0] - p.rho[1, 1])
-    p.dM_z = np.abs(p.M_z - M_z_old)
+    M_old = p.M if hasattr(p, 'M') else float('nan')
+    p.M = 0.5*(p.rho[0, 0] - p.rho[1, 1])
+    p.dM = np.abs(p.M - M_old)
     
     return p

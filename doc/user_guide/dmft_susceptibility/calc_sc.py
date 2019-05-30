@@ -29,13 +29,13 @@ p = ParameterCollection(
     mu = 0.,
     n_k = 16,
     n_iter = 10,
-    G_l_tol = 5e-4,
+    G_l_tol = 1e-5,
     )
 
 p.solve = ParameterCollection(
     length_cycle = 10,
     n_warmup_cycles = 10000,
-    n_cycles = int(2.5e5),
+    n_cycles = int(2e6),
     move_double = False,
     measure_G_l = True,
     )

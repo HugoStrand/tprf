@@ -30,15 +30,15 @@ subp = [1, 3, 1]
 opt = dict(cmap=plt.get_cmap('terrain_r'), vmin=0.0, vmax=0.01)
 plt.subplot(*subp); subp[-1] += 1
 plt.title(r'$\chi^{(0)}_m$')
-plt.imshow(np.squeeze(chi0_m.data).real, **opt)
+plt.imshow(np.squeeze(p.chi0_m.data).real, **opt)
 plt.colorbar()
 plt.subplot(*subp); subp[-1] += 1
 plt.title(r'$\chi_m$')
-plt.imshow(np.squeeze(chi_m.data).real, **opt)
+plt.imshow(np.squeeze(p.chi_m.data).real, **opt)
 plt.colorbar()
 plt.subplot(*subp); subp[-1] += 1
 plt.title(r'$\Gamma_m - U$')
-plt.imshow((np.squeeze(gamma_m.data) - p.U).real,
+plt.imshow((np.squeeze(p.gamma_m.data) - p.U).real,
            cmap=plt.get_cmap('RdBu_r'), vmin=-5, vmax=5)
 plt.colorbar()
 

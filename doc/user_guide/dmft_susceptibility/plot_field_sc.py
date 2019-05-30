@@ -9,16 +9,16 @@ def plot_ps(ps):
 
     plt.subplot(*subp); subp[-1] += 1
     plt.plot(ps.iter, ps.dG_l, 's-', label=r'$\Delta G_l$')
-    plt.plot(ps.iter, ps.dM_z, 'o-', label=r'$\Delta M_z$')
+    plt.plot(ps.iter, ps.dM, 'o-', label=r'$\Delta M$')
     plt.semilogy([], [])
-    plt.ylabel('$\Delta G_l$, $\Delta M_z$')
+    plt.ylabel('$\Delta G_l$, $\Delta M$')
     plt.legend(loc='best')
     plt.xlabel('Iteration')
 
     plt.subplot(*subp); subp[-1] += 1
-    plt.plot(ps.iter, ps.B_z, 's-', label=r'$B_z$')
-    plt.plot(ps.iter, ps.M_z, 'o-', label=r'$M_z$')
-    plt.ylabel(r'$M_z$, $B_z$')
+    plt.plot(ps.iter, ps.B, 's-', label=r'$B$')
+    plt.plot(ps.iter, ps.M, 'o-', label=r'$M$')
+    plt.ylabel(r'$M$, $B$')
     plt.legend(loc='best')
     plt.xlabel('Iteration')
 
@@ -53,7 +53,7 @@ def plot_p(p):
     plt.tight_layout()
     plt.savefig('figure_sc_gf.svg')
     
-filenames = np.sort(glob.glob('data_B_z*.h5'))
+filenames = np.sort(glob.glob('data_B_*.h5'))
 ps = []
 for filename in filenames:
     with HDFArchive(filename, 'r') as a:
@@ -61,7 +61,7 @@ for filename in filenames:
 
 ps = ParameterCollections(ps)
 
-with HDFArchive('data_B_z_0.000000.h5', 'r') as a:
+with HDFArchive('data_B_0.000000.h5', 'r') as a:
     p = a['ps'].objects[-1]
 
 plt.figure(figsize=(3.25*2, 5))
