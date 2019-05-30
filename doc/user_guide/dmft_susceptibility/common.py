@@ -1,3 +1,24 @@
+################################################################################
+#
+# TPRF: Two-Particle Response Function (TPRF) Toolbox for TRIQS
+#
+# Copyright (C) 2019 by The Simons Foundation
+# Author: H. U.R. Strand
+#
+# TPRF is free software: you can redistribute it and/or modify it under the
+# terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# TPRF is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# TPRF. If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 
 import copy
 import glob
@@ -13,6 +34,7 @@ from triqs_tprf.lattice import lattice_dyson_g_w
 from triqs_tprf.ParameterCollection import ParameterCollection
 from triqs_tprf.ParameterCollection import ParameterCollections
 from triqs_tprf.utilities import BlockGf_data
+
 def setup_dmft_calculation(p):
 
     p = copy.deepcopy(p)
@@ -38,6 +60,7 @@ def setup_dmft_calculation(p):
     p.sigma_w.zero()
 
     return p
+
 def solve_self_consistent_dmft(p):
 
     ps = []
@@ -51,6 +74,7 @@ def solve_self_consistent_dmft(p):
     if dmft_iter >= p.n_iter - 1: mpi.report('--> Warning: DMFT Not converged!')
     else: mpi.report('--> DMFT Converged: dG_l = {:f}'.format(p.dG_l))
     return ps
+
 def dmft_self_consistent_step(p):
 
     p = copy.deepcopy(p)
