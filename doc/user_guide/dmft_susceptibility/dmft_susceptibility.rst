@@ -39,7 +39,7 @@ The visulaization script is available here: :download:`plot_field.py <plot_field
 The resulting homogenous static spin susceptbility has the value
 
 .. math::
-   \chi = \left. \frac{dM}{dB} \right|_{B \rightarrow 0} \approx 0.349 \, .
+   \chi_{\textrm{Field}} = \left. \frac{dM}{dB} \right|_{B \rightarrow 0} \approx 0.3479 \, .
 
 This concludes the first method for computing static susceptibilities within DMFT.
 
@@ -109,7 +109,7 @@ The visulaization script is available here: :download:`plot_bse.py <plot_bse.py>
 The result for the homogeneous magnetic susceptbilitiy :math:`\chi(\mathbf{0})` from the BSE is
 
 .. math::
-   \chi_{BSE} \approx 0.344
+   \chi_{\textrm{BSE}} = \lim_{N_\nu \rightarrow \infty} \chi(\mathbf{0}) \approx 0.3472
 
 in quantitative agreement with the applied field value.
    
@@ -121,12 +121,16 @@ Now we can compare the two results for the homogeneous static magnetic susceptib
 1. the applied field calculation, and
 2. the BSE calculation.
 
-The results are in pretty good agreement despite the low accuracy used in the QMC calculations
+The results are in quantitative agreement
 
 .. math::
-   \chi_{Field} = \left. \frac{dM}{dB} \right|_{B \rightarrow 0} \approx 0.349
+   \chi_{\textrm{Field}} = \left. \frac{dM}{dB} \right|_{B \rightarrow 0} \approx 0.3479
+   \, ,
 
 .. math::
-   \chi_{BSE} \approx 0.344
+   \chi_{\textrm{BSE}} \approx 0.3472
+   \, ,
 
-Note, however, that the BSE approach is much more general than the applied field approach. The BSE calculation gives the whole momentum dependent lattice susceptibility :math:`\chi(\mathbf{Q})` and provides dynamical information when using finite Bosonic freqiencies :math:`|\omega| > 0`.
+and the accuracy is limited by the stochastic Monte Carlo noise in the vertex. This can be improved further by increasing the number of samples in the `triqs_cthyb` two-particle Green's function calculation.
+
+Note, that the BSE approach is much more general than the applied field approach. The BSE calculation gives the whole momentum dependent lattice susceptibility :math:`\chi(\mathbf{Q})` and provides dynamical information when using finite Bosonic freqiencies :math:`|\omega| > 0`.
