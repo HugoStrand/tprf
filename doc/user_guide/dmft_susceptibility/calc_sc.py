@@ -35,7 +35,7 @@ p = ParameterCollection(
 p.solve = ParameterCollection(
     length_cycle = 10,
     n_warmup_cycles = 10000,
-    n_cycles = int(2e6),
+    n_cycles = int(8e6),
     move_double = False,
     measure_G_l = True,
     )

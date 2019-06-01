@@ -30,7 +30,7 @@ p = mpi.bcast(p)
 
 # -- Sample G2
 
-p.solve.n_cycles = int(1e9 / 40. / 20.)
+p.solve.n_cycles = int(1e9 / 40.)
 p.solve.measure_G_l = False
 p.solve.measure_G_tau = False
 p.solve.measure_G2_iw_ph = True

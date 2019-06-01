@@ -53,7 +53,7 @@ def plot_chi_k(p, color=None):
     plt.gca().set_xticks(K_plot); plt.gca().set_xticklabels(K_labels)
     plt.grid(True); plt.ylabel(r'$\chi(\mathbf{Q})$')
     plt.legend(loc='best', fontsize=8)
-    return l[0].get_color()
+    return line[0].get_color()
 
 plt.figure(figsize=(3.25*2, 3))
 
@@ -80,16 +80,16 @@ Y = np.polyval(p, X)
 subp = [1, 2, 1]
 plt.subplot(*subp); subp[-1] += 1
 plt.plot(0, y0, 'rx')
-plt.plot(0, 0.349, 'r+')
+plt.plot(0, 0.3479, 'r+')
 plt.subplot(*subp); subp[-1] += 1
 plt.plot(X, Y, '--k', lw=1.0, zorder=-100)
-plt.plot(0, 0.349, 'r+', label=r'Field')
+plt.plot(0, 0.3479, 'r+', label=r'Field')
 plt.plot(0, y0, 'rx', label=r'BSE')
 plt.grid(True); plt.legend(loc='best', fontsize=8)
-plt.xlabel(r'$1/n_\nu$'); plt.ylabel(r'$\chi(\mathbf{0})$')
+plt.xlabel(r'$1/N_\nu$'); plt.ylabel(r'$\chi(\mathbf{0})$')
 plt.title(
     r'$\lim_{n_\nu \rightarrow \infty} \, \chi(\mathbf{0}) \approx $' + \
-    '${:3.3f}$'.format(y0))
+    '${:3.4f}$'.format(y0))
 plt.tight_layout()
-plt.savefig('figure_chi_bse.svg')
+plt.savefig('figure_bse.svg')
 plt.show()

@@ -31,7 +31,7 @@ To determine :math:`\chi` we perform a series of self consistent calculations fo
 
 The result is a magnetization :math:`M` vs. applied magnetic field :math:`B` curve, to which we fit a low order polynomial, and compute its zero field derivative.
 
-.. image:: figure_chi.svg
+.. image:: figure_field.svg
     :align: center
 
 The visulaization script is available here: :download:`plot_field.py <plot_field.py>`.
@@ -101,7 +101,7 @@ TPRF comes with an OpenMP amd MPI parallelized BSE solver `triqs_tprf.bse.solve_
 
 The resuls along the high symmetry path of the Brillouin zone is shown below for fixed :math:`N_\nu` (left panel) and the extrapolation for the :math:`\Gamma`-point is also shown (right panel).
 	   
-.. image:: figure_chi_bse.svg
+.. image:: figure_bse.svg
     :align: center
 
 The visulaization script is available here: :download:`plot_bse.py <plot_bse.py>`.

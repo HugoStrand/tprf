@@ -23,7 +23,7 @@ def plot_ps(ps):
     plt.xlabel('Iteration')
 
     plt.tight_layout()
-    plt.savefig('figure_sc_convergence.svg')
+    plt.savefig('figure_field_sc.svg')
     
 def plot_p(p):    
 
@@ -51,7 +51,7 @@ def plot_p(p):
     plt.gca().legend().set_visible(False)
 
     plt.tight_layout()
-    plt.savefig('figure_sc_gf.svg')
+    plt.savefig('figure_field_sc_gf.svg')
     
 filenames = np.sort(glob.glob('data_B_*.h5'))
 ps = []

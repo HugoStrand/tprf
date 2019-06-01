@@ -29,7 +29,7 @@ from triqs_tprf.lattice import lattice_dyson_g_wk
 from triqs_tprf.bse import solve_lattice_bse
 
 # -- Solve the lattice BSE for several fermionic window sizes
-for nwf in [6, 8, 10, 12, 20]:
+for nwf in [8, 10, 12, 20]:
 
     with HDFArchive('data_g2.h5', 'r') as a: p = a['p']
     p.nwf, p.tail_corr_nwf = nwf, 100

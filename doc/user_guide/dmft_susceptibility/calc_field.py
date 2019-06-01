@@ -25,7 +25,7 @@ from common import *
 p = ParameterCollection(
     t=1., B=0., U=10., mu=0., n_k=16, n_iter=10, G_l_tol=2e-5,
     solve = ParameterCollection(
-        length_cycle = 10, n_warmup_cycles = 10000, n_cycles = int(2.5e5),
+        length_cycle = 10, n_warmup_cycles = 10000, n_cycles = int(2.5e6),
         move_double = False, measure_G_l = True
         ),
     init = ParameterCollection(
