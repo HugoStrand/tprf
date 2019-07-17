@@ -71,4 +71,6 @@ if __name__ == '__main__':
 
     g0_wk = lattice_dyson_g0_wk(mu=mu, e_k=e_k, mesh=wmesh)
 
-    print 'lattice_dyson_g0_wk: ', time.time() - t, 's'
+    nc = int(sys.argv[1])
+    print 'nc =', nc
+    print 'lattice_dyson_g0_wk time * cores: ', (time.time() - t) * nc, 's'
