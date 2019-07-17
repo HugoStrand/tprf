@@ -69,9 +69,9 @@ if __name__ == '__main__':
     import time
 
     t = time.time()
-
     g0_wk = lattice_dyson_g0_wk(mu=mu, e_k=e_k, mesh=wmesh)
-
+    t_tot = time.time() - t
+    
     nc = int(sys.argv[1])
     print 'nc =', nc
-    print 'lattice_dyson_g0_wk time * cores: ', (time.time() - t) * nc, 's'
+    print 'lattice_dyson_g0_wk time: ', t_tot, ' | time*cores ', t_tot * nc, 's'
