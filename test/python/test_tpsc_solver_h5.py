@@ -6,7 +6,7 @@ from h5 import HDFArchive
 from triqs.gf import MeshDLRImFreq, MeshImFreq, Gf
 from triqs.lattice.tight_binding import TBLattice
 
-from tpsc_solver import tpsc_solver
+from triqs_tprf.tpsc_solver import tpsc_solver
 
 def test_tpsc_solver_h5():
 

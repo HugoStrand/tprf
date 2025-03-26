@@ -35,7 +35,7 @@ import numpy as np
 from triqs.gf import MeshDLRImFreq
 from triqs.lattice.tight_binding import TBLattice
 
-from tpsc_solver import tpsc_solver
+from triqs_tprf.tpsc_solver import tpsc_solver
 
 
 def test_chi_sum_rule():

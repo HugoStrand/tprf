@@ -30,9 +30,7 @@ import numpy as np
 from triqs.gf import MeshDLRImFreq
 from triqs.lattice.tight_binding import TBLattice
 
-from fourier_utils import fourier_wk_to_tr, fourier_wk_to_mtr, fourier_tr_to_wk
-
-from tpsc_solver import tpsc_solver
+from triqs_tprf.tpsc_solver import tpsc_solver
 
 def test_TPSC_plus_Sigma():
 
