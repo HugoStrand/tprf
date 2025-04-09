@@ -3,6 +3,7 @@
 # TPRF: Two-Particle Response Function (TPRF) Toolbox for TRIQS
 #
 # Copyright (C) 2019 by The Simons Foundation
+# Copyright (C) 2024 by Hugo U. R. Strand
 # Author: H. U.R. Strand
 #
 # TPRF is free software: you can redistribute it and/or modify it under the
@@ -20,21 +21,45 @@
 #
 ################################################################################
 
+
+""" Solve self-consistent DMFT for the Hubbard model on the square lattice
+in a sweep over applied external magnetic fields B. """
+
+
 from common import *
 
+
 p = ParameterCollection(
-    t=1., B=0., U=10., mu=0., n_k=16, n_iter=10, G_l_tol=2e-5,
-    solve = ParameterCollection(
-        length_cycle = 10, n_warmup_cycles = 10000, n_cycles = int(2.5e6),
-        move_double = False, measure_G_l = True
-        ),
-    init = ParameterCollection(
-        beta = 1., n_l = 10, n_iw = 400, n_tau = 4000,
-        gf_struct = [('up',[0]), ('do',[0])]
-        ),
+    t=1.,
+    B=0.,
+    U=10.,
+    mu=5.,
+    n_k=16,
+    n_iter=10,
+    G_tol=1e-4,
+    dlr_w_max=15.,
+    dlr_eps=1e-12,
+    n_iw=128,
+    )
+
+p.init = ParameterCollection(
+    beta=1.,
+    n_tau=127 * 4,
+    gf_struct=[('up', 1), ('do', 1)],
+    )
+
+p.solve = ParameterCollection(
+    length_cycle=5,
+    n_warmup_cycles=int(1e7),
+    n_cycles = int(1e8),
+    move_double_insert_segment=False,
+    move_double_remove_segment=False,
+    measure_densities=True,
+    measure_F_tau=True,
     )
 
 p = setup_dmft_calculation(p)
+
 for B in [0., 0.05, 0.1, 0.15, 0.2, 0.25, 0.4, 0.6, 0.8, 1.0]:
     p.B = B
     ps = solve_self_consistent_dmft(p)

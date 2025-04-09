@@ -3,6 +3,7 @@
 # TPRF: Two-Particle Response Function (TPRF) Toolbox for TRIQS
 #
 # Copyright (C) 2019 by The Simons Foundation
+# Copyright (C) 2024 by Hugo U. R. Strand
 # Author: H. U.R. Strand
 #
 # TPRF is free software: you can redistribute it and/or modify it under the
@@ -20,7 +21,10 @@
 #
 ################################################################################
 
+import glob
+
 from common import *
+
 from triqs.plot.mpl_interface import oplot, oplotr, plt
 
 ps = [] 
@@ -34,7 +38,8 @@ ps = ParameterCollections(ps)
 B, M = ps.B, ps.M
 B = np.concatenate((-B[1:][::-1], B))
 M = np.concatenate((-M[1:][::-1], M))
-p = np.polyfit(M, B, 5)
+order = 5
+p = np.polyfit(M, B, order)
 m = np.linspace(-0.5, 0.5, num=1000)
 b = np.polyval(p, m)
 chi = 1./np.polyval(np.polyder(p, 1), 0.).real
