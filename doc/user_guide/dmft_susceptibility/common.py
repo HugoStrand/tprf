@@ -40,7 +40,7 @@ from triqs_tprf.ParameterCollection import ParameterCollection
 from triqs_tprf.ParameterCollection import ParameterCollections
 from triqs_tprf.utilities import BlockGf_data
 
-from triqs_ctseg import Solver
+import triqs_ctseg
 
 
 def setup_dmft_calculation(p):
@@ -120,7 +120,7 @@ def dmft_self_consistent_step(p):
     from triqs.operators import n
     p.solve.h_loc0 =  p.h_loc0 - p.B * (n('up', 0) - n('do', 0))
     
-    S = Solver(**p.init.dict())
+    S = triqs_ctseg.Solver(**p.init.dict())
 
     # -- Hybridization function
     
